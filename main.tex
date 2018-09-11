@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[super]{natbib}
+\usepackage{siunitx}
+
+
+
+
+\title{Correlation of Inflammatory Biomarkers with DTI Metrics in an Over-60 HIV+ Population}
+\author{Kevin Chihow Chang}
+\date{September 11, 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Abs here
+\end{abstract}
+
+\section{Introduction}
+Although the introduction of combination antiretroviral therapies (cART) reduced the prevalence of the most severe neurocognitive disorders, milder forms of HIV-associated neurocognitive disorders (HAND) are still common.\cite{Heaton2010HIV-associatedStudy} A proposed mechanism for the development of HAND is chronic inflammation and immune activation. %cite stuff here
+
+% discuss biomarker selection here?
+
+Diffusion Tensor Imaging (DTI) is a commonly used MRI technique which allows for the characterization of white matter microstructure integrity through the quantification of metrics like fractional anisotropy (FA), a measure of the directionality of water diffusion along white matter tracts, and mean diffusivity (MD), a measure of the magnitude of water diffusion in all directions.\cite{Basser1996MicrostructuralMRI.,Alexander2007DiffusionBrain.}
+
+Previous studies have reported % DTI PREVIOUS STUDIES HERE
+in the context of unsuppressed viral RNA 
+
+
+
+
+
+\section{Methods}
+\subsection{Participants}
+HIV-positive participants were drawn from the Over-60 Cohort and Mindfulness-Based Stress Reduction studies at the University of California, San Francisco. Selection criteria included confirmed HIV infection, HIV RNA viral suppression, over 60 years of age, and the successful acquisition of baseline structural and diffusion MRI scans and blood draws. Exclusion factors included endorsement of illicit drug use in the past six months, treatable conditions that may affect cognition like neurosyphilis, thyroid disorders, or B12 deficiency, or other major confounding factors such as impairment caused by alcohol of substance use.
+
+All participants (n=44) were symptomatic for cognitive impairment, as defined by an endorsement of ``almost always," ``very often," or ``fairly often" for at least one cognitive symptom on the Patient Assessment of Own Functioning (PAOF) questionnaire. Five participants were not diagnosed with HAND as they were impaired in only one ability domain, 38 participants were diagnosed with MND, and one participant was diagnosed with HAD, based on consensus conference guided by the 2007 Frascati criteria.\cite{Antinori2007UpdatedDisorders.} 
+
+\subsection{MRI Acquisition}
+All participants underwent whole-brain imaging on either a Siemens TIM Trio 3 Tesla MRI scanner with a 12-channel head coil or a Siemens Prisma FIT 3 Tesla MRI scanner with a 64-channel head coil. Structural imaging on the Trio was acquired by Magnetization Prepared Rapid Gradient Echo (MP-RAGE) sequences with sagittal slice orientation, 1.0x1.0x1.0mm voxel size, 160 slices per slab, 240x256 FOV, 2,300ms TR, 2.98ms TE, 900ms TI, and \ang{9} flip angle. Structural imaging on the Prisma was acquired with nearly identical sequences with a 2.9ms TE.
+
+Diffusion imaging was acquired on the Trio by ...
+Diffusion imaging on the Prisma was acquired by...
+
+\subsection{Image Processing}
+Diffusion image processing begins with denoising.\cite{Veraart2016DenoisingTheory.} The FSL MCFLIRT algorithm is utilized to align images to the primary volume of the sequence.\cite{Jenkinson2002ImprovedImages.} Data reflecting absolute displacement parameters beyond 1mm were screened out and removed if necessary. Background voxels not considered brain tissue were masked out of the volumes by applying a median otsu function, which uses the B0 acquisitions to provide a mask using otsu thresholding with a 4mm radius and 4 iterations to minimize intra-class variance.\cite{Garyfallidis2014DipyData} FSL Eddy was applied using the realigned diffusion images, mask, and b-vectors and b-values to correct for eddy current-induced distortions.\cite{Andersson2016AnImaging.} Remaining tensors were then fitted using Dipy with a non-linear least-squares approach to create the DTI metric (FA and MD) maps.\cite{Garyfallidis2014DipyData}
+
+Post-processing steps were carried out using the DTI-TK package to construct within-scanner group templates and normalize the DTI metric maps. Group templates are aligned %more here
+with the standard IXI Aging template provided by the package.
+
+Region of interest (ROI) analysis is performed by warping the Johns Hopkins University (JHU) white matter atlas into the group template spaces. Mean DTI metrics are calculated using ANTs ImageIngensityStatistics in a priori defined regions identified as affected in HIV infection - the corpus callosum, corona radiata, and superior longitudinal fasciculus % Cite here
+Correlation of mean FA and mean MD metrics for these ROIs are regressed against the levels of inflammatory biomarkers using Python 2.7 with the statsmodels package with the inclusion of age, length of infection, and scanner in the model as covariates. % Cite Python and statsmodels here
+
+In addition, voxel-wise statistical analysis is carried out using Track-Based Spatial Statistics (TBSS), which projects all subject's diffusion data onto a mean FA tract skeleton before applying voxel-wise cross-subject statistics, and FSL randomise to perform threshold-free cluster enhancement (tfce) statistics corrected for multiple comparisons.\cite{Smith2006Tract-basedData,Smith2004AdvancesFSL} TBSS is performed on within-scanner groups to prevent scanner hardware and sequence differences from biasing results.
+
+\section{Results}
+
+
+
+\section{Discussion}
+
+
+
+\section{Conclusion}
+
+
+\bibliographystyle{unsrt} 
+\bibliography{ref.bib} 
+
+
+\end{document}
